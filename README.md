@@ -4,7 +4,7 @@
 
 - [Semantic Versioning](#semantic-versioning)
 - [Install the Terraform CLI](#install-the-terraform-cli)
-    - [Considerations-with-the-terraform-cli-change]
+    - [Considerations-with-the-terraform-cli-change](#c)
 
 # Semantic Versioning :mage: :mage:
 
