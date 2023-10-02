@@ -1,15 +1,8 @@
-resource "random_string" "bucket_name" {
-  lower = true
-  upper = false
-  length = 32
-  special = false
-}
-
-resource "aws_s3_bucket" "example" {
+resource "aws_s3_bucket" "website_bucket" {
   #https://registry.terraform.io/providers/hashicorp/random/latest/docs
-  bucket = random_string.bucket_name.result
+  bucket = var.bucket_name
 
   tags = {
-    UserUuid        = var.user_uuid
+    UserUuid = var.user_uuid
     }
   }
