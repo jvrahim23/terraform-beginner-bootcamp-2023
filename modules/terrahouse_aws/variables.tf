@@ -21,21 +21,21 @@ variable "bucket_name" {
 }
 
 variable "index_html_filepath" {
-  description = "Path to the index.html file"
+  description = "The file path for index.html"
   type        = string
 
   validation {
-    condition     = can(file(var.index_html_filepath))
-    error_message = "The specified index_html_filepath is not a valid file path."
+    condition     = fileexists(var.index_html_filepath)
+    error_message = "The provided path for index.html does not exist."
   }
 }
 
 variable "error_html_filepath" {
-  description = "Path to the error.html file"
+  description = "The file path for error.html"
   type        = string
 
   validation {
-    condition     = can(file(var.error_html_filepath))
-    error_message = "The specified error_html_filepath is not a valid file path."
+    condition     = fileexists(var.error_html_filepath)
+    error_message = "The provided path for error.html does not exist."
   }
 }
