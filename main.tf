@@ -1,7 +1,6 @@
 terraform {
   required_providers {
     terratowns = {
-      #terraform-provider-terratowns/~/.terraform.d/plugins/local.providers/local/terratowns/1.0.0/linux_amd64/terraform-provider-terratowns_v1.0.0
       source = "local.providers/local/terratowns"
       version = "1.0.0"
     }
