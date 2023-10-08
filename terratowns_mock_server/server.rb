@@ -3,9 +3,19 @@ require 'json'
 require 'pry'
 require 'active_model'
 
+# we will mock having a state or database for this development server
+# by setting a global variable. You would never use a global variable 
+# in a production server
 $home = {}
 
+# This is a ruby class that includes validations from ActiveRecord.
+# This wil represent our Home resources as a ruby object. 
 class Home
+  # ActiveModel is part of Ruby on Rails. 
+  # it is used as an ORM. It has a module withing.
+  # ActiveModel that provides validations. 
+  # The production Terratowns server is rails and uses
+  # very similar and in most cases
   include ActiveModel::Validations
   attr_accessor :town, :name, :description, :domain_name, :content_version
 
@@ -19,6 +29,8 @@ class Home
   validates :content_version, numericality: { only_integer: true }
 end
 
+# we are extending a class from Sinatra :: Base to
+# turn this generic class to utilize
 class TerraTownsMockServer < Sinatra::Base
 
   def error code, message
@@ -48,11 +60,16 @@ class TerraTownsMockServer < Sinatra::Base
   end
 
   def find_user_by_bearer_token
+    # https://swagger.io/docs/specification/authentication/bearer-authentication/
     auth_header = request.env["HTTP_AUTHORIZATION"]
+    # check if the AUTHORIZATION header exists
     if auth_header.nil? || !auth_header.start_with?("Bearer ")
       error 401, "a1000 Failed to authenicate, bearer token invalid and/or teacherseat_user_uuid invalid"
     end
 
+    # Does the token match the one in our database?
+    # if we cannot find it than return an error.
+    # code = access_code = token
     code = auth_header.split("Bearer ")[1]
     if code != x_access_code
       error 401, "a1001 Failed to authenicate, bearer token invalid and/or teacherseat_user_uuid invalid"
@@ -69,8 +86,8 @@ class TerraTownsMockServer < Sinatra::Base
 
   # CREATE
   post '/api/u/:user_uuid/homes' do
-    ensure_correct_headings
-    find_user_by_bearer_token
+    ensure_correct_headings # these are functions in ruby
+    find_user_by_bearer_token # these are functions in ruby
     puts "# create - POST /api/homes"
 
     begin
@@ -185,4 +202,5 @@ class TerraTownsMockServer < Sinatra::Base
   end
 end
 
+# This runs the server
 TerraTownsMockServer.run!
