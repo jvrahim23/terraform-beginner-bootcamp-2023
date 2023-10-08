@@ -1,14 +1,20 @@
-#terraform {
+terraform {
+  #backend "remote" {
+  #  hostname = "app.terraform.io"
+  #  organization = "ExamPro"
+   
+  #  workspaces {
+  #    name = "terra-house-1"
+  #  }
+  #}
   #cloud {
-    #organization = "jvrahim23"
-    #workspaces {
-      #name = "terra-house-scarlett-ohara"
-   # }
- # }
+  #  organization = "ExamPro"
+  #  workspaces {
+  #    name = "terra-house-1"
+  #  }
+  #}
 
-#provider "random" {
-  # Configuration options
-#}
+}
 
 module "terrahouse_aws" {
   source = "./modules/terrahouse_aws"
